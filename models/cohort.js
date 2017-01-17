@@ -20,7 +20,8 @@ class Cohort {
     })
   }
   static updateCohort(db, input, id){
-    let UPDATE_COHORT = `UPDATE cohorts SET name = '${input.name} WHERE id = ${input.id}'`
+    let UPDATE_COHORT = `UPDATE cohorts SET name = '${input.name}
+    WHERE id = ${input.id}'`
     db.serialize(function () {
       db.run(UPDATE_COHORT, function (err) {
         if (err) {
@@ -32,7 +33,7 @@ class Cohort {
     })
   }
   static deleteCohort(db,id){
-    lET DELETE_COHORT = `DELETE FROM cohorts WHERE id = ${id}`
+    let DELETE_COHORT = `DELETE FROM cohorts WHERE id = ${id}`
     db.serialize(function () {
       db.run(DELETE_COHORT, function (err) {
         if (err) {
@@ -44,7 +45,7 @@ class Cohort {
     })
   }
   static findById(db, id){
-    LET FIND_COHORT_ID = `SELECT * FROM cohorts WHERE id = ?`
+    let FIND_COHORT_ID = `SELECT * FROM cohorts WHERE id = ?`
     db.serialize(function () {
       db.all(FIND_COHORT_ID, id, function (err, data) {
         if (err) {
@@ -66,7 +67,7 @@ class Cohort {
       }
     }
     db.serialize(function () {
-      LET FIND_ALL = `SELECT * FROM cohorts`
+      let FIND_ALL = `SELECT * FROM cohorts`
       db.all(FIND_ALL, find)
     })
   }

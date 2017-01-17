@@ -59,7 +59,7 @@ class Student {
       })
     })
   }
-  static findAll(db){
+  static findAll(db, obj){
     let find = function (err, data) {
       if (!err) {
         for (var i = 0; i < data.length; i++) {
@@ -89,7 +89,7 @@ class Student {
       let WHERE_STUDENT = `SELECT * FROM students WHERE ${field}`
       db.all(WHERE_STUDENT, find)
     })
-    return true
+    // return true
   }
 }
 
