@@ -23,6 +23,7 @@ if(p === "playtime"){
     r.context.dbModel = db
     r.context.Help = help
     r.context.Student = Student
+    r.context.Cohort = Cohort
     // r.context.Student = student
 
 }
@@ -39,14 +40,14 @@ if(p === "playtime"){
 //
 // })
 //
-// Student.where(dbModel.connection,"firstname = 'windi'",function(data,err){
+// Student.where(dbModel.connection,"firstname = 'irsan'",function(err,data){
 //
 //       if(!err){
 //         for(var i = 0;i <data.length;i++){
 //           console.log(data[i]);
 //         }
 //       }else{
-//         console.log("Error");
+//         console.log("ERROR");
 //       }
 //
 // })

@@ -1,7 +1,7 @@
 "use strict"
 const sqlite = require("sqlite3").verbose()
-const CREATE_STUDENT = "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, email TEXT, is_deleted, cohort_id INTEGER, FOREIGN KEY (cohort_id) REFERENCES cohorts (id));";
-const CREATE_COHORT  = "CREATE TABLE IF NOT EXISTS cohorts (id INTEGER PRIMARY KEY AUTOINCREMENT, group_name TEXT);";
+const CREATE_STUDENT = "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, email TEXT, is_deleted INTEGER, cohort_id INTEGER, FOREIGN KEY (cohort_id) REFERENCES cohorts (id));";
+const CREATE_COHORT  = "CREATE TABLE IF NOT EXISTS cohorts (id INTEGER PRIMARY KEY AUTOINCREMENT, group_name TEXT,is_deleted INTEGER);";
 class DBModel {
 
     constructor(file){

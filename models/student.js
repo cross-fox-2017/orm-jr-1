@@ -91,16 +91,7 @@ class Student {
       let QUERY = "SELECT * FROM students WHERE is_deleted = 0;";
 
       db.serialize(function(){
-        db.all(QUERY,function(err,result){
-          if(err){
-
-            callback(null,err)
-
-          }else{
-
-            callback(result,null)
-          }
-        });
+        db.all(QUERY,callback)
       });
 
     }
@@ -121,7 +112,7 @@ class Student {
               console.log("ID\t\t|FirstName\t|LastName\t|GROUP_ID");
             for(let j = 0; j < result.length;j++){
 
-                console.log(`${result[j].id}|${result[j].firstname}\t|${result[j].lastname}\t|${result[j].cohort_id}`);
+                console.log(`${result[j].id}\t\t|${result[j].firstname}\t|${result[j].lastname}\t|${result[j].cohort_id}`);
             }
           }
         });
@@ -133,10 +124,14 @@ class Student {
 
       let db = con
 
-      let QUERY = "SELECT * FROM students WHERE is_deleted = 0;";
+      let QUERY = "SELECT * FROM students WHERE id = $id;";
 
       db.serialize(function(){
-        db.all(QUERY,function(err,result){
+        db.all(QUERY,{
+
+              $id: data
+
+        },function(err,result){
           if(err){
             console.log(err);
           }else{
@@ -156,31 +151,11 @@ class Student {
 
       let db = con
 
-      let result = str.split(" ")
-
-      let QUERY = "SELECT * FROM students WHERE $key = %$value%;";
+      let QUERY = `SELECT * FROM students WHERE `;
 
       db.serialize(function(){
-        db.all(QUERY,{
-
-              $key: result[0],
-              $value: result[2]
-
-        },function(err,result){
-          if(err){
-
-            callback(null,err)
-
-          }else{
-
-            callback(result,null)
-          }
-        });
+        db.all(QUERY+str,callback);
       });
-
-
-
-
     }
 
 }
