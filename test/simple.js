@@ -37,5 +37,5 @@ function cek(mockup, type){
   })
 }
 
-testStudentCreate()
-testStudentUpdate()
+testStudentCreate();
+testStudentUpdate();
