@@ -29,7 +29,7 @@ function tesStudentUpdate(){
 function cek(tes){
   var query= `SELECT * FROM students
               WHERE firstname ='${tes.firstname}' AND lastname='${tes.lastname}'
-              AND cohort_id = '${tes.cohort_id}'`
+              AND cohort_id = ${tes.cohort_id}`
 
   db.connection.serialize(function(){
     db.connection.all(query,function(err,students){
