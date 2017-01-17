@@ -70,7 +70,7 @@ class Student {
       }
     }
     db.serialize(function() {
-      let FIND_ALL = `SELECT * from students`;
+      let FIND_ALL = `SELECT * FROM students`;
         db.all(FIND_ALL, find)
      })
     //  return true
