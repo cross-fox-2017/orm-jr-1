@@ -14,7 +14,7 @@ class Student {
   static create(db, dataStudent){
     let insertStudent   = `INSERT INTO students(firstname, lastname, telepon, cohort_id) VALUES ('${dataStudent.firstname}','${dataStudent.lastname}',${dataStudent.telepon},${dataStudent.cohort_id});`
     db.serialize(function(){
-      db.all(insertStudent, function(err){
+      db.run(insertStudent, function(err){
         if(err){console.log(err);
         }else{console.log("SEED INSERT SUCCSESS!!")
         }

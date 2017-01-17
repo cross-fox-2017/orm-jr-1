@@ -4,15 +4,15 @@ import DBModel from "./models/db_model.js";
 import Cohort from "./models/cohort.js";
 import Student from "./models/student.js";
 
-// help(){
-//   console.log('SHOW ALL STUDENTS....................: show()');
-//   console.log('FIND STUDENT BY NAME (FIRST OR LAST).: findByName()');
-//   console.log('ADD NEW STUDENT......................: insert(\'firstname\', \'lastname\', \'telepon\')');
-//   console.log('REMOVE STUDENT.......................: delete(id)  ');
-//   console.log('UPDATE STUDENT\'s DETAIL..............: update(\'firstname\', \'lastname\', \'telepon\', \'id\')  ');
-//   console.log('GET BIRTHDAY BY THIS MONTH...........: getBirthdayByThisMonth() ')
-//   console.log('SORT BIRTHDAY BY MONTH...............: sortBirthday()');
-// }
+class Help {
+  static help() {
+    console.log('SHOW ALL STUDENTS/COHORT......: lihat Drive code untuk test case!!');
+    console.log('FIND STUDENT/COHORT BY NAME...: lihat Driver code untuk test case!!');
+    console.log('ADD NEW STUDENT/COHORT........: insert(\'firstname\', \'lastname\', \'telepon\')');
+    console.log('REMOVE STUDENT/COHORT.........: delete(id)  ');
+    console.log('UPDATE STUDENT\'s DETAIL.......: update(\'firstname\', \'lastname\', \'telepon\', \'id\')  ');
+  }
+}
 
 const repl  = require("repl");
 var db      = new DBModel("./db/student.db")
@@ -23,5 +23,5 @@ if(argv == "playtime"){
   replStart.context.dbModel = db
   replStart.context.Student = Student
   replStart.context.Cohort  = Cohort
-  // replStart.context.help    = help
+  replStart.context.help    = Help.help
 }
