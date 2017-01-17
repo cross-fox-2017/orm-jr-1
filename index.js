@@ -12,4 +12,5 @@ if (play = 'playtime'){
   let repled = repl.start('> ').context
   repled.dbModel = db
   repled.Student = Student
+  repled.Cohort = Cohort
 }
