@@ -83,7 +83,7 @@ class Student {
   static where (db, value, callback) {
     let show = `SELECT * FROM students WHERE ${value};`;
     db.serialize(function () {
-      db.all(show, function (err, row) {
+      db.all(show, function (err, row) { // urutannya: query, ${} atau ? ?, callbacknya
         if (err) {
           callback(null,err);
         }
@@ -101,3 +101,17 @@ class Student {
 }
 
 export default Student
+
+
+/*
+Student.findAll(dbModel.connection, {limit: 2, offset: 1}, function (data, err) {
+  if (!err) {
+    for (var i = 0; i < data.length; i++) {
+      console.log(data[i]);
+    }
+    else {
+      console.log('Error');
+    }
+  }
+})
+*/
