@@ -58,6 +58,23 @@ class Cohort {
     });
   }
 
+  //Driver code
+  //Cohort.findById(dbModel.connection, id)
+  static findById(connection, id){
+   let db = connection
+  let find = `SELECT * FROM cohorts WHERE id LIKE '${id}';`;
+   db.serialize(function() {
+     db.each(find, function (err,row) {
+       if (err) {
+         console.log(err);
+       }
+       else {
+         console.log(row);
+       }
+     })
+   })
+ }
+
 //Driver code untuk test case
   // Cohort.where(dbModel.connection, "name = 'ke 3'", function(err, data){
   // if(!err){
