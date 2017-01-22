@@ -102,18 +102,18 @@ export default Student
 // 	if(!err) {
 // 		for(var i=0; i<data.length; i++) {
 // 			console.log(data[i]);
-// 		} else {
+// 		}
+// 	} else {
 // 			console.log('Error');
 // 		}
-// 	}
 // })
 
 // Student.where(dbModel.connection, "firstname = 'Isumi'", function(data, err) {
 // 	if(!err) {
 // 		for(var i=0; i<data.length; i++) {
 // 			console.log(data[i]);
-// 		} else {
+// 		}
+// 	} else {
 // 			console.log('Error');
 // 		}
-// 	}
 // })
