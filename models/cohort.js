@@ -74,7 +74,7 @@ class Cohort {
    })
  }
 
-  // Cohort.where(dbModel.connection, "name = 'ke 3'", function(err, data){
+  // Cohort.where(dbModel.connection, "name = 'crossfox'", function(err, data){
   //   if(!err){
   //     for(var i = 0; i < data.length; i++){
   //       console.log(data[i])

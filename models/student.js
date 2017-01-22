@@ -76,7 +76,7 @@ class Student {
    })
  }
 
-  // Student.where(dbModel.connection, "firstname = 'Eri'", function(err, data){
+  // Student.where(dbModel.connection, "firstname = 'yomi'", function(err, data){
   //   if(!err){
   //     for(var i = 0; i < data.length; i++){
   //       console.log(data[i])
