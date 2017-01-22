@@ -1,6 +1,10 @@
 "use strict"
 
+const fs = require('fs')
 const sqlite = require('sqlite3').verbose()
+
+let CREATE_TABLE_STUDENT = "CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT, cohort_id INTEGER);"
+let CREATE_TABLE_COHORT = "CREATE TABLE IF NOT EXISTS cohort (id INTEGER PRIMARY KEY AUTOINCREMENT, cohort_name TEXT NOT NULL);"
 
 class DBModel {
 	constructor(file) {
@@ -9,20 +13,20 @@ class DBModel {
 
 	setup() {
 		let db = this.connection
-		let CREATE_TABLE_STUDENT = "CREATE TABLE student (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT, cohort_id INTEGER);"
-		let CREATE_TABLE_COHORT = "CREATE TABLE cohort (id INTEGER PRIMARY KEY AUTOINCREMENT, cohort_name TEXT NOT NULL);"
+		let createStudent = () => {
+			db.serialize(function(){
+		   	db.run(CREATE_TABLE_STUDENT, function(err) {
+		    	if(err) {
+	        	console.log(err);
+	      	} else {
+	        	console.log('CREATE TABLE STUDENT: SUCCESS!');
+	      	}
+		    });
+		  });
+		}
 
-		db.serialize(function(){
-	   		db.run(CREATE_TABLE_STUDENT, function(err) {
-	    		if(err) {
-	        		console.log(err);
-	      		} else {
-	        		console.log('CREATE TABLE STUDENT: SUCCESS!');
-	      		}
-	    	});
-	  	});
-
-	  	db.serialize(function(){
+		let createCohort = () => {
+			db.serialize(function(){
 	   		db.run(CREATE_TABLE_COHORT, function(err) {
 	    		if(err) {
 	        		console.log(err);
@@ -31,8 +35,10 @@ class DBModel {
 	      		}
 	    	});
 	  	});
+		}
+		createStudent()
+		createCohort()
 	}
-
 }
 
 export default DBModel

@@ -84,6 +84,36 @@ class Student {
 		})
 	}
 
-}
+	static help() {
+		let menu = `create(connection, data)\nupdate(connection, data)\ndelete(connection, id)\nfindById(connection, id)\nfindAll(connection, cb)\nwhere(connection, value, cb)`
+		console.log(menu)
+	}
 
+}
 export default Student
+
+// Student.create(dbModel.connection, new Student("Isumi", "Karinaningsih", 1))
+// Student.create(dbModel.connection, new Student("Isumi", "Karina", 1))
+// Student.update(dbModel.connection, new Student("Isumi", "zumi", 1, 1))
+// Student.delete(dbModel.connection, 2)
+// Student.findById(dbModel.connection, 1)
+
+// Student.findAll(dbModel.connection, function(data, err) {
+// 	if(!err) {
+// 		for(var i=0; i<data.length; i++) {
+// 			console.log(data[i]);
+// 		} else {
+// 			console.log('Error');
+// 		}
+// 	}
+// })
+
+// Student.where(dbModel.connection, "firstname = 'Isumi'", function(data, err) {
+// 	if(!err) {
+// 		for(var i=0; i<data.length; i++) {
+// 			console.log(data[i]);
+// 		} else {
+// 			console.log('Error');
+// 		}
+// 	}
+// })
