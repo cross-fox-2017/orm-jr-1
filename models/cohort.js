@@ -58,7 +58,7 @@ class Cohort {
     });
   }
 
-  //Cohort.findById(dbModel.connection, id)
+  //Cohort.findById(dbModel.connection, 1)
   static findById(connection, id){
    let db = connection
   let find = `SELECT * FROM cohorts WHERE id LIKE '${id}';`;

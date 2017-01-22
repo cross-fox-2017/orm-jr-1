@@ -60,7 +60,7 @@ class Student {
     });
   }
 
-  //Student.findById(dbModel.connection, id)
+  //Student.findById(dbModel.connection, 1)
   static findById(connection, id){
    let db = connection
   let find = `SELECT * FROM students WHERE id LIKE '${id}';`;
