@@ -19,7 +19,7 @@ function testUpdateStudent() {
     firstname: "Isumi",
     lastname: "Karina",
     cohort_id: 1,
-    id: 2
+    id: 1
   }
 
   Student.update(db.connection, new Student(testing.firstname, testing.lastname, testing.cohort_id, testing.id))

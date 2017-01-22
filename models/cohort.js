@@ -3,13 +3,13 @@
 import Student from "./student.js";
 
 class Cohort {
-  constructor(name, id) {
-    this.name = name,
+  constructor(cohortname, id) {
+    this.cohortname = cohortname,
     this.id = id
   }
 
   static create(connection, data){
-    let CREATE_COHORT = `INSERT INTO cohort (name) VALUES ('${data.name}');`
+    let CREATE_COHORT = `INSERT INTO cohort (cohortname) VALUES ('${data.cohortname}');`
 
     connection.serialize(function() {
         connection.run(CREATE_COHORT, function(err) {
@@ -23,7 +23,7 @@ class Cohort {
   }
 
   static update(connection, data){
-    let UPDATE_COHORT = `UPDATE cohort SET name = '${data.name}' WHERE id = '${data.id}';`
+    let UPDATE_COHORT = `UPDATE cohort SET cohortname = '${data.cohortname}' WHERE id = '${data.id}';`
 
     connection.serialize(function() {
         connection.run(UPDATE_COHORT, function(err) {
@@ -61,7 +61,7 @@ class Cohort {
             console.log(`TABLE COHORT\n_________________\n`)
             console.log("ID|\t\tName|")
             for(let i = 0;i < rows.length;i++){
-              console.log(rows[i].id+"\t\t"+rows[i].name)
+              console.log(rows[i].id+"\t\t"+rows[i].cohortname)
             }
          }
       })
@@ -91,3 +91,8 @@ class Cohort {
 
 }
 export default Cohort
+
+// Cohort.create(dbModel.connection, new Cohort("Cross Fox"))
+// Cohort.create(dbModel.connection, new Cohort("Bland Fox"))
+// Cohort.update(dbModel.connection, new Cohort("Cross Fox 2016", 1))
+// Cohort.delete(dbModel.connection, 2)
