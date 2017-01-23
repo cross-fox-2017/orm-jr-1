@@ -68,21 +68,49 @@ class Cohort {
     })
   }
 
-  static findAll(connection, cb){
-    let FIND_ALL_COHORT = `SELECT * FROM cohort;`
-
-    connection.serialize(function() {
-        connection.all(FIND_ALL_COHORT, cb)
-    })
+  static findAll (connection, cb) {
+    let allData = `SELECT cohort.*, student.firstname, student.lastname, student.cohort_id FROM cohort LEFT JOIN student ON student.cohort_id = cohort.id;`
+    connection.serialize(function () {
+      connection.all(allData, function (err, rows) {
+        if (err) {
+          cb(null,err);
+        }
+        else {
+          cb(rows);
+        }
+      });
+    });
   }
 
-  static where(connection, value, cb){
-    let WHERE_COHORT = `SELECT * FROM cohort WHERE ${value};`
-
-    connection.serialize(function() {
-        connection.all(WHERE_COHORT, cb)
-    })
+  static where (connection, value, cb) {
+    let whereData = `SELECT * FROM cohort WHERE ${value};`
+    connection.serialize(function () {
+      connection.all(whereData, function (err, rows) {
+        if (err) {
+          cb(null,err);
+        }
+        else {
+          cb(rows);
+        }
+      });
+    });
   }
+
+  // static findAll(connection, cb){
+  //   let FIND_ALL_COHORT = `SELECT * FROM cohort;`
+  //
+  //   connection.serialize(function() {
+  //       connection.all(FIND_ALL_COHORT, cb)
+  //   })
+  // }
+  //
+  // static where(connection, value, cb){
+  //   let WHERE_COHORT = `SELECT * FROM cohort WHERE ${value};`
+  //
+  //   connection.serialize(function() {
+  //       connection.all(WHERE_COHORT, cb)
+  //   })
+  // }
 
   static help() {
 		let menu = `create(connection, data)\nupdate(connection, data)\ndelete(connection, id)\nfindById(connection, id)\nfindAll(connection, cb)\nwhere(connection, value, cb)`
@@ -96,3 +124,6 @@ export default Cohort
 // Cohort.create(dbModel.connection, new Cohort("Bland Fox"))
 // Cohort.update(dbModel.connection, new Cohort("Cross Fox 2016", 1))
 // Cohort.delete(dbModel.connection, 2)
+// Cohort.findById(dbModel.connection, 1)
+// Cohort.findAll(dbModel.connection, function(data, err) {if(!err) {for(var i=0; i<data.length; i++) {console.log(data[i]);}} else {console.log('Error');}})
+// Cohort.where(dbModel.connection, "cohortname = 'Cross Fox 2016'", function(data, err) {if(!err) {for(var i=0; i<data.length; i++) {console.log(data[i]);}} else {console.log('Error');}})

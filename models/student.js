@@ -68,21 +68,49 @@ class Student {
 		})
 	}
 
-	static findAll(connection, cb){
-		let FIND_ALL_STUDENT = `SELECT * FROM student;`
+	// static findAll(connection, cb){
+	// 	let FIND_ALL_STUDENT = `SELECT * FROM student;`
+	//
+	// 	connection.serialize(function() {
+  // 			connection.all(FIND_ALL_STUDENT, cb)
+	// 	})
+	// }
+	//
+	// static where(connection, value, cb){
+	// 	let WHERE_STUDENT = `SELECT * FROM student WHERE ${value};`
+	//
+	// 	connection.serialize(function() {
+  // 			connection.all(WHERE_STUDENT, cb)
+	// 	})
+	// }
 
-		connection.serialize(function() {
-  			connection.all(FIND_ALL_STUDENT, cb)
-		})
-	}
+	static findAll (connection, cb) {
+    let allData = `SELECT student.*, cohort.cohortname FROM student LEFT JOIN cohort ON student.cohort_id = cohort.id;`
+    connection.serialize(function () {
+      connection.all(allData, function (err, rows) {
+        if (err) {
+          cb(null,err);
+        }
+        else {
+          cb(rows);
+        }
+      });
+    });
+  }
 
-	static where(connection, value, cb){
-		let WHERE_STUDENT = `SELECT * FROM student WHERE ${value};`
-
-		connection.serialize(function() {
-  			connection.all(WHERE_STUDENT, cb)
-		})
-	}
+  static where (connection, value, cb) {
+    let whereData = `SELECT * FROM student WHERE ${value};`
+    connection.serialize(function () {
+      connection.all(whereData, function (err, rows) {
+        if (err) {
+          cb(null,err);
+        }
+        else {
+          cb(rows);
+        }
+      });
+    });
+  }
 
 	static help() {
 		let menu = `create(connection, data)\nupdate(connection, data)\ndelete(connection, id)\nfindById(connection, id)\nfindAll(connection, cb)\nwhere(connection, value, cb)`
@@ -97,23 +125,5 @@ export default Student
 // Student.update(dbModel.connection, new Student("Isumi", "zumi", 1, 1))
 // Student.delete(dbModel.connection, 2)
 // Student.findById(dbModel.connection, 1)
-
-// Student.findAll(dbModel.connection, function(data, err) {
-// 	if(!err) {
-// 		for(var i=0; i<data.length; i++) {
-// 			console.log(data[i]);
-// 		}
-// 	} else {
-// 			console.log('Error');
-// 		}
-// })
-
-// Student.where(dbModel.connection, "firstname = 'Isumi'", function(data, err) {
-// 	if(!err) {
-// 		for(var i=0; i<data.length; i++) {
-// 			console.log(data[i]);
-// 		}
-// 	} else {
-// 			console.log('Error');
-// 		}
-// })
+// Student.findAll(dbModel.connection, function(data, err) {if(!err) {for(var i=0; i<data.length; i++) {console.log(data[i]);}} else {console.log('Error');}})
+// Student.where(dbModel.connection, "firstname = 'Isumi'", function(data, err) {if(!err) {for(var i=0; i<data.length; i++) {console.log(data[i]);}} else {console.log('Error');}})
