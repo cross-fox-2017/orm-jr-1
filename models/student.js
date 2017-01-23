@@ -1,56 +1,54 @@
 "use strict"
 
-const repl       = require('repl');
-const sqlite     = require('sqlite3').verbose();
-
 class Student {
-  constructor(firstname, lastname, cohort_id){
+  constructor(id, firstname, lastname, cohort_id){
+    this.id        = id;
     this.firstname = firstname;
     this.lastname  = lastname;
     this.cohort_id = cohort_id;
   }
 
   // CREATE Data Student
-  static createStudent(db, data) {
+  static create(db, data) {
     let createDataStudent = `INSERT INTO students (firstname, lastname, cohort_id) VALUES ($firstname,$lastname,$cohort_id);`;
       db.serialize(function() {
-        db.each(createDataStudent, {
+        db.run(createDataStudent, {
           $firstname : data.firstname,
           $lastname  : data.lastname,
           $cohort_id : data.cohort_id
         },
         function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log('CREATE');
-        }
+          if(err) {
+            console.log(err);
+          } else {
+            console.log('CREATE');
+          }
+        });
       });
-    });
   }
 
   // UPDATE Data Student
-  static updateStudent(db, data){
+  static update(db, data){
     let updateDataStudent = `UPDATE students SET firstname=$firstname, lastname=$lastname, cohort_id=$cohort_id WHERE id=$id;`;
       db.serialize(function() {
-        db.each(updateDataStudent, {
+        db.run(updateDataStudent, {
           $firstname : data.firstname,
           $lastname  : data.lastname,
-          $id        : data.id,
-          $cohort_id : data.cohort_id
+          $cohort_id : data.cohort_id,
+          $id        : data.id
         },
         function(err, row) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log('UPDATE');
-        }
+          if(err) {
+            console.log(err);
+          } else {
+            console.log('UPDATE');
+          }
+        });
       });
-    });
   }
 
   // DELETE Data Student
-  static deleteStudent(db, id) {
+  static delete(db, id) {
     let deleteDataStudent = `DELETE FROM students WHERE id=$id;`;
       db.serialize(function() {
         db.run(deleteDataStudent, {
@@ -67,36 +65,48 @@ class Student {
   }
 
   // FIND ID Data Student
-  static findByIdStudent(db, id) {
+  static findById(db, id) {
     let findDataStudent = `SELECT * FROM students WHERE id=$id;`;
       db.serialize(function() {
         db.each(findDataStudent, {
           $id : id
         },
         function(err, row) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(`${row.id} | ${row.firstname} | ${row.lastname} | ${row.cohort_id}`);
-        }
+          if(err) {
+            console.log(err);
+          } else {
+            console.log(`${row.id} | ${row.firstname} | ${row.lastname} | ${row.cohort_id}`);
+          }
+        });
       });
-    });
   }
 
   // FIND ALL Data Student
-  static findAllStudent(db, callback) {
+  static findAll(db, callback) {
     let findDataStudent = `SELECT * FROM students;`;
       db.serialize(function() {
-        db.all(findDataStudent, callback)
-    });
+        db.all(findDataStudent, function(err, row) {
+          if(err) {
+            callback(err);
+          } else {
+            callback(row);
+          }
+        });
+      });
   }
 
   // WHERE Data Student
-  static whereStudent(db, values, callback) {
-    let whereDataStudent = 'SELECT * FROM students WHERE ';
+  static where(db, values, callback) {
+    let whereDataStudent = 'SELECT * FROM students WHERE ${values}';
       db.serialize(function() {
-        db.all(whereDataStudent + values, callback)
-    });
+        db.all(whereDataStudent, function(err, row) {
+          if(err) {
+            callback(err);
+          } else {
+            callback(row)
+          }
+        })
+      });
   }
 }
 

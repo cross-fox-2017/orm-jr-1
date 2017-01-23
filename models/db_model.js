@@ -1,9 +1,6 @@
 "use strict"
 
-const repl               = require('repl');
-const sqlite             = require('sqlite3').verbose();
-let CREATE_TABLE_STUDENT = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT NOT NULL, cohort_id INTEGER, FOREIGN KEY (cohort_id) REFERENCES cohorts (id) );";
-let CREATE_TABLE_COHORT  = "CREATE TABLE IF NOT EXISTS cohorts  ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);";
+const sqlite = require('sqlite3').verbose();
 
 class DBModel {
   constructor(file) {
@@ -11,10 +8,11 @@ class DBModel {
   }
 
   setup() {
+    let CREATE_TABLE_STUDENT = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT NOT NULL, cohort_id INTEGER, FOREIGN KEY (cohort_id) REFERENCES cohorts (id) );";
+    let CREATE_TABLE_COHORT  = "CREATE TABLE IF NOT EXISTS cohorts  ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);";
+    let db = this.connection;
 
     // TABLE DATA Student
-    let db = this.connection;
-    let createTableStudent = () => {
       db.serialize(function() {
         db.run(CREATE_TABLE_STUDENT, function(err) {
           if(err) {
@@ -24,10 +22,8 @@ class DBModel {
           }
         });
       });
-    }
 
     // TABLE DATA Cohort
-    let createTableCohort = () => {
       db.serialize(function() {
         db.run(CREATE_TABLE_COHORT, function(err) {
           if(err) {
@@ -37,10 +33,6 @@ class DBModel {
           }
         });
       });
-    }
-
-    createTableStudent();
-    createTableCohort();
   }
 }
 
