@@ -21,7 +21,6 @@ class Student {
     }
 
     static update(connection, input) {
-
         connection.serialize(function() {
             let query = `UPDATE students SET firstname='${input.firstname}', lastname='${input.lastname}', cohort_id='${input.cohort_id}' where id='${input.id}'`;
             connection.run(query, function(err) {
@@ -80,7 +79,7 @@ class Student {
         return true;
     }
 
-    where(connection,field){
+    static where(connection,field){
       var search = function(err, data) {
           if (!err) {
               for (var i = 0; i < data.length; i++) {
@@ -91,7 +90,7 @@ class Student {
           }
       }
       connection.serialize(function() {
-          let query = `SELECT * from students where ${field}`;
+          let query = `SELECT * from students where id=${field}`;
           connection.all(query, search)
       })
       return true;
