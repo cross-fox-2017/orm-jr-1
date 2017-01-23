@@ -70,9 +70,7 @@ class Student {
 
       db.serialize(function(){
         db.all(QUERY,{
-
           $id: data
-
         },function(err,result){
           if(err){
             console.log(err);
@@ -91,7 +89,9 @@ class Student {
       let QUERY = "SELECT * FROM students WHERE is_deleted = 0;";
 
       db.serialize(function(){
-        db.all(QUERY,callback)
+        db.all(QUERY,function(err, result){
+              callback(err,result)
+        })
       });
 
     }
@@ -128,9 +128,7 @@ class Student {
 
       db.serialize(function(){
         db.all(QUERY,{
-
               $id: data
-
         },function(err,result){
           if(err){
             console.log(err);
@@ -154,7 +152,9 @@ class Student {
       let QUERY = `SELECT * FROM students WHERE `;
 
       db.serialize(function(){
-        db.all(QUERY+str,callback);
+        db.all(QUERY+str,function(err,result){
+              callback(err,result)
+        });
       });
     }
 

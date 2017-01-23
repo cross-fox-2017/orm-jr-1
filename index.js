@@ -28,7 +28,7 @@ if(p === "playtime"){
 
 }
 
-// Student.findAll(dbModel.connection,function(data,err){
+// Student.findAll(dbModel.connection,function(err,data){
 //
 //       if(!err){
 //         for(var i = 0;i <data.length;i++){
