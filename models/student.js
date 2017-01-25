@@ -92,8 +92,6 @@ class Student {
     });
     // Student.findId(dbModel.connection, "3" )
   }
-
-
 }
 
 export default Student
