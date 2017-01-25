@@ -93,7 +93,41 @@ class Student {
     // Student.findId(dbModel.connection, "3" )
   }
 
+  static findOrCreate(db, obj) {
+    var QUERY_INSERT = `INSERT INTO students (first_name, last_name, cohort_id) VALUES ('${obj.first_name}', '${obj.last_name}', '${obj.cohort_id}' )`;
+    var QUERY_CHECK = `SELECT * FROM students WHERE first_name = '${obj.first_name}' AND last_name = '${obj.last_name}' `;
 
+    db.all(QUERY_CHECK, function(err, row) {
+      console.log(row);
+      if (row.length) {
+        console.log("data sudah ada coy");
+      } else {
+        db.run(QUERY_INSERT, function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("STUDENT added");
+          }
+        });
+      }
+    });
+  }
+  // Student.findOrCreate(dbModel.connection, new Student("irwin","pratajaya","3"))
+
+  static help () {
+    console.log(`
+      Student.add => add data
+        Student.add(dbModel.connection, new Student("irwin","pratajaya","3"))
+
+      Student.delete => delete data
+        Student.delete(dbModel.connection, "1")
+
+      Student.change => change data
+        Student.change(dbModel.connection, "irwin", "pratajaya", "3", "1")
+
+      Student.show => show all data
+        Student.show(dbModel.connection)`);
+  }
 }
 
 export default Student

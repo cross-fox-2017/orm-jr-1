@@ -17,7 +17,6 @@ class Cohort {
           console.log("COHORTS added");
         }
       });
-    // Cohort.add(dbModel.connection, new Cohort("gajah"))
   }
 
   static delete (db, id) {
@@ -29,7 +28,6 @@ class Cohort {
           console.log("COHORTS delete");
         }
       });
-    // Cohort.delete(dbModel.connection, "1")
   }
 
   static change (db, name ,id) {
@@ -41,7 +39,6 @@ class Cohort {
           console.log("COHORTS changed");
         }
       });
-    // Cohort.change(dbModel.connection, "buaya", "6")
   }
 
   static show (db) {
@@ -76,9 +73,35 @@ class Cohort {
         console.log(row);
       }
     });
-    // Cohort.findId(dbModel.connection, '9');
   }
 
+  static findAll (db, obj, callback) {
+    var QUERY_FINDALL = `SELECT * FROM cohorts LIMIT ${obj.limit} OFFSET ${obj.offset}`;
+    console.log(QUERY_FINDALL);
+    db.all(QUERY_FINDALL, function(err, rows) {
+      callback(rows, err)
+    })
+  }
+
+  static findOrCreate(db, obj) {
+    var QUERY_INSERT = `INSERT INTO cohorts (name) VALUES ('${obj.first_name}' )`;
+    var QUERY_CHECK = `SELECT * FROM cohorts WHERE name = '${obj.first_name}' `;
+
+    db.all(QUERY_CHECK, function(err, row) {
+      console.log(row);
+      if (row.length) {
+        console.log("data already exists");
+      } else {
+        db.run(QUERY_INSERT, function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("COHORT added");
+          }
+        });
+      }
+    });
+  }
 }
 
 export default Cohort

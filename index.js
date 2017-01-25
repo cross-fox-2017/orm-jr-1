@@ -8,7 +8,6 @@ const repl = require("repl")
 const sqlite = require('sqlite3').verbose();
 
 var db = new DBModel("./db/students.db")
-db.setup()
 var p = process.argv[2]
 
 if (p == 'playtime') {
@@ -17,3 +16,6 @@ if (p == 'playtime') {
   r.context.Student = Student
   r.context.Cohort = Cohort
 }
+// console.log(`to run this program, enter:
+//   babel-node index.js playtime
+//   `);
