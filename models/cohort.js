@@ -17,7 +17,6 @@ class Cohort {
           console.log("COHORTS added");
         }
       });
-    // Cohort.add(dbModel.connection, new Cohort("gajah"))
   }
 
   static delete (db, id) {
@@ -29,7 +28,6 @@ class Cohort {
           console.log("COHORTS delete");
         }
       });
-    // Cohort.delete(dbModel.connection, "1")
   }
 
   static change (db, name ,id) {
@@ -41,7 +39,6 @@ class Cohort {
           console.log("COHORTS changed");
         }
       });
-    // Cohort.change(dbModel.connection, "buaya", "6")
   }
 
   static show (db) {
@@ -76,9 +73,7 @@ class Cohort {
         console.log(row);
       }
     });
-    // Cohort.findId(dbModel.connection, '9');
   }
-
 }
 
 export default Cohort
